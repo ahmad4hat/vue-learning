@@ -1,12 +1,17 @@
 <template>
-  <div id="app">
+  <b-container fluid id="app">
+    <Header></Header>
     <router-view></router-view>
-  </div>
+  </b-container>
 </template>
 
 <script>
+import Header from "./components/Header";
 export default {
-  name: "App"
+  name: "App",
+  components: {
+    Header: Header
+  }
 };
 </script>
 
@@ -17,6 +22,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  padding: 30px;
 }
 </style>
