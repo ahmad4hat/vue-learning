@@ -1,6 +1,6 @@
 <template>
   <b-row>
-    <Stock v-for="stock in stocks" v-bind:key="stock.id">{{stock.name}}</Stock>
+    <Stock v-for="stock in stocks" v-bind:key="stock.id" :stock="stock">{{stock.name}}</Stock>
   </b-row>
 </template>
 <script>

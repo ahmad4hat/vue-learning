@@ -1,15 +1,41 @@
 <template>
   <b-col sm="12" md="6" style="padding:30px">
     <div class="card">
-      <h1 class="header-text">Name</h1>
-      <form action method="post" class="form">
-        <input type="number" class="price-input" placeholder="Quantity" />
+      <h1 class="header-text">
+        {{stock.name}}
+        <small>({{stock.price}})</small>
+      </h1>
+      <div class="form">
+        <input type="number" class="price-input" placeholder="Quantity" v-model="quantity" />
         <div class="empty-box"></div>
-        <button type="submit" class="submit-button">Buy</button>
-      </form>
+        <button
+          @click="buyMethod"
+          class="submit-button"
+          :disabled=" quantity <= 0 || Number.isInteger(quantity)"
+        >Buy</button>
+      </div>
     </div>
   </b-col>
 </template>
+<script>
+export default {
+  props: ["stock"],
+  data: () => ({
+    quantity: 0
+  }),
+  methods: {
+    buyMethod() {
+      const order = {
+        id: this.stock.id,
+        price: this.stock.price,
+        quantity: this.quantity
+      };
+      console.log(order);
+      this.quantity = 0;
+    }
+  }
+};
+</script>
 <style lang="scss" scoped>
 .card {
   overflow: hidden;
