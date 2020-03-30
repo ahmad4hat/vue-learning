@@ -5,6 +5,7 @@ import "./plugins/bootstrap-vue";
 import App from "./App.vue";
 import VueRouter from "vue-router";
 import { routes } from "./routes.js";
+import store from "./store";
 
 Vue.use(VueRouter);
 
@@ -16,5 +17,6 @@ const router = new VueRouter({
 
 new Vue({
   render: h => h(App),
+  store,
   router
 }).$mount("#app");

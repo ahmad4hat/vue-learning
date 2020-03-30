@@ -9,8 +9,12 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <router-link to="/portfolio" tag="b-nav-item" active-class="active">Portfolio</router-link>
-          <router-link to="/stocks" tag="b-nav-item" active-class="active">Stocks</router-link>
+          <router-link to="/portfolio" tag="b-nav-item" active-class="active"
+            >Portfolio</router-link
+          >
+          <router-link to="/stocks" tag="b-nav-item" active-class="active"
+            >Stocks</router-link
+          >
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->

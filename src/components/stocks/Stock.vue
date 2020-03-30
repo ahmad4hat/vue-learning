@@ -2,17 +2,24 @@
   <b-col sm="12" md="6" style="padding:30px">
     <div class="card">
       <h1 class="header-text">
-        {{stock.name}}
-        <small>({{stock.price}})</small>
+        {{ stock.name }}
+        <small>({{ stock.price }})</small>
       </h1>
       <div class="form">
-        <input type="number" class="price-input" placeholder="Quantity" v-model="quantity" />
+        <input
+          type="number"
+          class="price-input"
+          placeholder="Quantity"
+          v-model="quantity"
+        />
         <div class="empty-box"></div>
         <button
           @click="buyMethod"
           class="submit-button"
-          :disabled=" quantity <= 0 || Number.isInteger(quantity)"
-        >Buy</button>
+          :disabled="quantity <= 0 || Number.isInteger(quantity)"
+        >
+          Buy
+        </button>
       </div>
     </div>
   </b-col>

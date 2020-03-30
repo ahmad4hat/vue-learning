@@ -11,6 +11,9 @@ export default {
   name: "App",
   components: {
     Header: Header
+  },
+  created() {
+    this.$store.dispatch("initStocks");
   }
 };
 </script>
