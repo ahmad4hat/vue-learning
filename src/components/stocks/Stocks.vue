@@ -1,8 +1,10 @@
 <template>
   <b-row>
-    <Stock v-for="stock in stocks" v-bind:key="stock.id" :stock="stock">{{
+    <Stock v-for="stock in stocks" v-bind:key="stock.id" :stock="stock">
+      {{
       stock.name
-    }}</Stock>
+      }}
+    </Stock>
   </b-row>
 </template>
 <script>

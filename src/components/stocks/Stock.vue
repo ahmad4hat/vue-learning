@@ -6,20 +6,13 @@
         <small>({{ stock.price }})</small>
       </h1>
       <div class="form">
-        <input
-          type="number"
-          class="price-input"
-          placeholder="Quantity"
-          v-model="quantity"
-        />
+        <input type="number" class="price-input" placeholder="Quantity" v-model="quantity" />
         <div class="empty-box"></div>
         <button
           @click="buyMethod"
           class="submit-button"
           :disabled="quantity <= 0 || Number.isInteger(quantity)"
-        >
-          Buy
-        </button>
+        >Buy</button>
       </div>
     </div>
   </b-col>
@@ -38,6 +31,7 @@ export default {
         quantity: this.quantity
       };
       console.log(order);
+      this.$store.dispatch("buyStock", order);
       this.quantity = 0;
     }
   }

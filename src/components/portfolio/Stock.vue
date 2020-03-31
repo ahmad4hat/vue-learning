@@ -1,5 +1,86 @@
 <template>
-  <div>
-    <h2>portfoilo stock</h2>
-  </div>
+  <b-col sm="12" md="6" style="padding:30px">
+    <div class="card">
+      <h1 class="header-text">
+        {{ stock.name }}
+        <small>({{ stock.price }})</small>
+        <small>(Quantity {{stock.quantity }})</small>
+      </h1>
+      <div class="form">
+        <input type="number" class="price-input" placeholder="Quantity" v-model="quantity" />
+        <div class="empty-box"></div>
+        <button
+          @click="sellStock"
+          class="submit-button"
+          :disabled="quantity <= 0 || Number.isInteger(quantity)"
+        >Sell</button>
+      </div>
+    </div>
+  </b-col>
 </template>
+<script>
+export default {
+  props: ["stock"],
+  data: () => ({
+    quantity: 0
+  }),
+  methods: {
+    sellStock() {
+      const order = {
+        stockId: this.stock.id,
+        stockPrice: this.stock.price,
+        quantity: this.quantity
+      };
+      this.$store.dispatch("sellStock", order);
+    }
+  }
+};
+</script>
+<style lang="scss" scoped>
+.card {
+  overflow: hidden;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+
+  display: flex;
+  flex-direction: column;
+  border-radius: 22px 22px 22px 22px;
+
+  padding: 1%;
+
+  box-shadow: 10px 10px 34px -10px rgba(0, 0, 0, 0.75);
+}
+.header-text {
+  // color: var(--teal);
+}
+.form {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  .price-input {
+    font: inherit;
+    border: none;
+    border-bottom: 1px solid var(--teal);
+    font-size: 150%;
+
+    margin: 0 20px;
+    display: block;
+    outline: none;
+    padding: 10px;
+  }
+  .submit-button {
+    border: none;
+    background: var(--teal);
+    border-radius: 6%;
+    padding: 10px;
+    display: block;
+  }
+  .empty-box {
+    display: inline;
+    height: 10px;
+    width: 10px;
+  }
+}
+</style>
