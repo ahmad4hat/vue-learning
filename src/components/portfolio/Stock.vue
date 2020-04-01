@@ -7,12 +7,12 @@
         <small>(Quantity {{stock.quantity }})</small>
       </h1>
       <div class="form">
-        <input type="number" class="price-input" placeholder="Quantity" v-model="quantity" />
+        <input type="number" class="price-input" placeholder="Quantity" v-model.number="quantity" />
         <div class="empty-box"></div>
         <button
           @click="sellStock"
           class="submit-button"
-          :disabled="quantity <= 0 || Number.isInteger(quantity)"
+          :disabled="insufficientQuantity|| quantity <= 0 || !Number.isInteger(quantity)"
         >Sell</button>
       </div>
     </div>
@@ -24,11 +24,19 @@ export default {
   data: () => ({
     quantity: 0
   }),
+  computed: {
+    funds() {
+      return this.$store.getters.funds;
+    },
+    insufficientQuantity() {
+      return this.stock.quantity < this.quantity;
+    }
+  },
   methods: {
     sellStock() {
       const order = {
-        stockId: this.stock.id,
-        stockPrice: this.stock.price,
+        id: this.stock.id,
+        price: this.stock.price,
         quantity: this.quantity
       };
       this.$store.dispatch("sellStock", order);

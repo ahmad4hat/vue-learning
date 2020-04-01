@@ -8,13 +8,12 @@
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
+        <b-nav-text>
+          <strong>FUNDS {{ funds}}</strong>
+        </b-nav-text>
         <b-navbar-nav>
-          <router-link to="/portfolio" tag="b-nav-item" active-class="active"
-            >Portfolio</router-link
-          >
-          <router-link to="/stocks" tag="b-nav-item" active-class="active"
-            >Stocks</router-link
-          >
+          <router-link to="/portfolio" tag="b-nav-item" active-class="active">Portfolio</router-link>
+          <router-link to="/stocks" tag="b-nav-item" active-class="active">Stocks</router-link>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
@@ -30,3 +29,12 @@
     </b-navbar>
   </div>
 </template>
+<script>
+export default {
+  computed: {
+    funds() {
+      return this.$store.getters.funds;
+    }
+  }
+};
+</script>

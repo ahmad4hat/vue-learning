@@ -6,12 +6,18 @@
         <small>({{ stock.price }})</small>
       </h1>
       <div class="form">
-        <input type="number" class="price-input" placeholder="Quantity" v-model="quantity" />
+        <input
+          type="number"
+          class="price-input"
+          placeholder="Quantity"
+          v-model.number="quantity"
+          @change="checkMethod"
+        />
         <div class="empty-box"></div>
         <button
           @click="buyMethod"
           class="submit-button"
-          :disabled="quantity <= 0 || Number.isInteger(quantity)"
+          :disabled=" (insufficientFunds || quantity <= 0 || !Number.isInteger(quantity))"
         >Buy</button>
       </div>
     </div>
@@ -23,12 +29,27 @@ export default {
   data: () => ({
     quantity: 0
   }),
+  computed: {
+    funds() {
+      return this.$store.getters.funds;
+    },
+    insufficientFunds() {
+      return this.stock.price * this.quantity > this.funds;
+    }
+  },
   methods: {
+    checkMethod() {
+      console.log(this.stock.price);
+      console.log(this.quantity);
+      console.log(this.insufficientFunds);
+      console.log(this.quantity <= 0);
+      console.log(!Number.isInteger(this.quantity));
+    },
     buyMethod() {
       const order = {
         id: this.stock.id,
         price: this.stock.price,
-        quantity: this.quantity
+        quantity: parseInt(this.quantity)
       };
       console.log(order);
       this.$store.dispatch("buyStock", order);

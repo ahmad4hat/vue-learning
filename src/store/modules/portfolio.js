@@ -2,7 +2,8 @@ const state = { funds: 1000, stocks: [] };
 export const BUY_STOCKS = "BUY_STOCKS";
 export const SELL_STOCKS = "SELL_STOCKS";
 const mutations = {
-  [BUY_STOCKS](state, { id, quantity, stockPrice }) {
+  [BUY_STOCKS](state, { id, quantity, price }) {
+    console.log(state.funds);
     const record = state.stocks.find(el => el.id == id);
     if (record) {
       record.quantity += quantity;
@@ -11,17 +12,22 @@ const mutations = {
         id: id,
         quantity: quantity
       });
-      state.funds -= stockPrice * quantity;
+      console.log(state);
+
+      console.log(price);
+      console.log(quantity);
+      state.funds -= price * quantity;
+      console.log("hello " + state.funds);
     }
   },
-  [SELL_STOCKS](state, { stockId, quantity, stockPrice }) {
-    const record = state.stocks.find(el => el.id == stockId);
+  [SELL_STOCKS](state, { id, quantity, price }) {
+    const record = state.stocks.find(el => el.id == id);
     if (record.quantity > quantity) {
       record.quantity -= quantity;
     } else {
       state.stocks.splice(state.stocks.indexOf(record), 1);
     }
-    state.funds += quantity * stockPrice;
+    state.funds += quantity * price;
   }
 };
 
