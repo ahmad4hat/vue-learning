@@ -9,11 +9,12 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-nav-text>
-          <strong>FUNDS {{ funds}}</strong>
+          <strong>FUNDS {{ funds | currency}}</strong>
         </b-nav-text>
         <b-navbar-nav>
           <router-link to="/portfolio" tag="b-nav-item" active-class="active">Portfolio</router-link>
           <router-link to="/stocks" tag="b-nav-item" active-class="active">Stocks</router-link>
+          <b-nav-item @click="endDay">End day</b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
@@ -34,6 +35,12 @@ export default {
   computed: {
     funds() {
       return this.$store.getters.funds;
+    }
+  },
+  methods: {
+    endDay() {
+      console.log("hello");
+      this.$store.dispatch("randomizeStocks");
     }
   }
 };
